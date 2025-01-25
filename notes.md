@@ -17,3 +17,7 @@
 - /hello /hello2 / /test123 /test like it change the order and understand the importance of ordering
 - install postman app and a make a workspace/collection -> test a api call
 - write logic to handle GET, POST, PATCH, DELETE API Calls and test them on Postman
+- Explore routing and use of ?, +, (), * in routes 
+- Use of regex in rotes /a/, /.*fly$/
+- Reading the query params in the routes
+- Reading the dynamic routes

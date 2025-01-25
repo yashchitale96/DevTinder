@@ -2,12 +2,13 @@ const express = require('express');
 
 const app = express();
 
-app.use("/user", (req,res) =>{
-    res.send("HAHAHAHA");
-})
+// app.use("/user", (req,res) =>{
+//     res.send("HAHAHAHA");
+// })
 
 // this will only handele GET call to /uesr
-app.get("/user", (req,res) =>{
+app.get("/user/:userid/:name/:password", (req,res) =>{
+    console.log(req.params);
     res.send({firstName:"Yash", lastName:"Chitale"})
 })
 
