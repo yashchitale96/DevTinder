@@ -13,3 +13,7 @@
 - .gitignore -> node_modules
 - create a remote repo on github
 - push all code to remote origin
+- ordering is very important for rounting
+- /hello /hello2 / /test123 /test like it change the order and understand the importance of ordering
+- install postman app and a make a workspace/collection -> test a api call
+- write logic to handle GET, POST, PATCH, DELETE API Calls and test them on Postman
