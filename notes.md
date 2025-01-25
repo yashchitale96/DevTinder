@@ -9,6 +9,8 @@
 - what are dependencies
 - what is the use of '-g' while npm install
 - difference between carot and tilde (^ vs ~)
+
+
 - Initialize git 
 - .gitignore -> node_modules
 - create a remote repo on github
@@ -21,3 +23,8 @@
 - Use of regex in rotes /a/, /.*fly$/
 - Reading the query params in the routes
 - Reading the dynamic routes
+
+- Multiple Route Handlers - Play with code
+- next()
+- next function and errors along with res.send()
+- app.use("/route", rH, [rH2, rH3, rH4, rH5])
