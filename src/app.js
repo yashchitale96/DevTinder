@@ -1,21 +1,27 @@
 const express = require('express');
-
+const { adminAuth, userAuth } = require('./middleware/auth');
 const app = express();
 
-app.use("/user", (req, res, next) => {
-    // Route Handler 1
-    console.log("Response 1");
-    next();
-    // res.send("route handler 1");
-}, (req, res, next) => {
-    // Route Handler 2
-    console.log("Response 2");
-    next();
-    // res.send("route handler 2");
-}, (req, res) => {
-    console.log("Response 3");
-    res.send("Response 3");
+// Handle Auth Middleware for all GET POST ... Requests
+app.use('/admin', adminAuth);
+
+app.get('/user', userAuth, (req, res) => {
+    res.send("Hello");
+});
+
+app.get('/admin/getAllData', (req, res) => {
+    res.send("All data Sent");
 })
+
+app.get("/admin/deleteUser", (req, res) => {
+    res.send("Deleted a user");
+})
+
+// app.use('/', (err, req, res) => {
+//     if(err) {
+//         res.send("Something went wrong")
+//     }
+// })
 
 
 app.listen(7777, () => {
