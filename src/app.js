@@ -1,30 +1,34 @@
 const express = require('express');
-const { adminAuth, userAuth } = require('./middleware/auth');
+const conntectDB = require("./config/database");
 const app = express();
+const User = require('./models/user')
 
-// Handle Auth Middleware for all GET POST ... Requests
-app.use('/admin', adminAuth);
+app.post('/signup', async (req,res) =>{
+   
+    // creating a new instance of the user model
+    const user = new User({
+        firstName : "Virat",
+        lastName : "Kohli",
+        emailID : "virat@gmail.com",
+        password : "Virat@123"
+    });
 
-app.get('/user', userAuth, (req, res) => {
-    res.send("Hello");
-});
-
-app.get('/admin/getAllData', (req, res) => {
-    res.send("All data Sent");
+    try{
+        await user.save();
+        res.send("User Added Successfully")
+    } catch(err)
+    {
+        res.status(400).send("Error saving the user") + err.message;
+    }
+    
 })
 
-app.get("/admin/deleteUser", (req, res) => {
-    res.send("Deleted a user");
+
+conntectDB().then(() => {
+    console.log("Database connection is established");
+    app.listen(7777, () => {
+        console.log("Server is sucessfully listening on port 7777");
+    });
+}).catch(err => {
+    console.log("Database cannot be connected");
 })
-
-// app.use('/', (err, req, res) => {
-//     if(err) {
-//         res.send("Something went wrong")
-//     }
-// })
-
-
-app.listen(7777, () => {
-    console.log("Server is sucessfully listening on port 7777");
-
-});
