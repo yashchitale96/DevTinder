@@ -50,3 +50,10 @@
 - API GET user by email & eed API - GET / feed - get all the users from the database
 - Create a delete user API
 - Difference between PATCH and PUT
+
+- Explore schematype options from the documentation
+- add required, unique, lowercase, min, minLength, trim
+- add default
+- create a custom validation for gender
+- improve the DB schema - PUT all appropriate validation in each field in schema
+- Add timestamps to the userSchema
