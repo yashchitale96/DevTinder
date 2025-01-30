@@ -41,4 +41,12 @@
 - Create a userSchema & user model
 - Create /signup API to add data to database
 - Push some documents using api calls from position
+- Error Handling using try, catch
 
+- JS object vs JSON
+- Add the express.json middleware to your app
+- Make your signup API dynamic to receive data from the end user
+- User.findOne with duplicate email ids, which object return
+- API GET user by email & eed API - GET / feed - get all the users from the database
+- Create a delete user API
+- Difference between PATCH and PUT
