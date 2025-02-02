@@ -61,3 +61,9 @@
 - Data Sanitizing - Add API validation for each field
 - Install validator
 - Explore the validator library functions and use validator functions for passwrod, email, photourl
+
+- Validate data in SignUp API
+- Install Bcrypt package
+- Create a password hash using bcrypt.hash & save the user with encrypted password
+-Create Login API 
+- Compare password and throw errors if email or password is invalid
