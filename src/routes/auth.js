@@ -9,6 +9,7 @@ authRouter.post('/signup', async (req, res) => {
     try {
         // validation of data
         validateSignUpData(req);
+
         const { firstName, lastName, emailId, password } = new User(req.body)
 
         // Encrypt the password
@@ -18,8 +19,11 @@ authRouter.post('/signup', async (req, res) => {
         const user = new User({
             firstName, lastName, emailId, password: passwordHash
         })
+
         await user.save();
+        
         res.send("User Added Successfully")
+    
     } catch (err) {
         res.status(400).send("Error: " + err.message);
     }
@@ -27,8 +31,11 @@ authRouter.post('/signup', async (req, res) => {
 
 authRouter.post('/login', async (req, res) => {
     try {
+       
         const { emailId, password } = req.body;
+       
         const user = await User.findOne({ emailId: emailId });
+        
         if (!user) {
             throw new Error("Invalid Credential");
         }
@@ -40,11 +47,13 @@ authRouter.post('/login', async (req, res) => {
 
             // Add the token to cookie and send the response back to user
             res.cookie("token", token);
-            res.send("Login successfull");
+            res.send("Login successful");
         }
+
         else {
             throw new Error("Password is not correct");
         }
+        
     } catch (err) {
         res.status(400).send("Error: " + err.message)
     }
