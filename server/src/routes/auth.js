@@ -5,7 +5,7 @@ const User = require('../models/user');
 const bcrypt = require("bcrypt");
 
 
-authRouter.post('/signup', async (req, res) => {
+authRouter.post('/signup', async(req, res) => {
     try {
         // validation of data
         validateSignUpData(req);
@@ -17,24 +17,27 @@ authRouter.post('/signup', async (req, res) => {
 
         // Creating a new instance of the User model
         const user = new User({
-            firstName, lastName, emailId, password: passwordHash
+            firstName,
+            lastName,
+            emailId,
+            password: passwordHash
         })
 
         await user.save();
         res.send("User Added Successfully")
-    
+
     } catch (err) {
         res.status(400).send("Error: " + err.message);
     }
 })
 
-authRouter.post('/login', async (req, res) => {
+authRouter.post('/login', async(req, res) => {
     try {
-       
+
         const { emailId, password } = req.body;
-       
+
         const user = await User.findOne({ emailId: emailId });
-        
+
         if (!user) {
             throw new Error("Invalid Credential");
         }
@@ -43,34 +46,30 @@ authRouter.post('/login', async (req, res) => {
 
         if (isPasswordValid) {
             // Create the JWT Token
-                // const token = await jwt.sign({_id: user._id}, "Yash123#", {expiresIn:"1d"});
+            // const token = await jwt.sign({_id: user._id}, "Yash123#", {expiresIn:"1d"});
             const token = await user.getJWT(); // getJWT() function is present in user model
 
             // Add the token to cookie and send the response back to user
             res.cookie("token", token);
             // console.log(res.cookie);
             res.send("Login successful");
-        }
-
-        else {
+        } else {
             throw new Error("Password is not correct");
         }
-        
+
     } catch (err) {
         res.status(400).send("Error: " + err.message)
     }
 })
 
 authRouter.post('/logout', async(req, res) => {
-    try{
+    try {
         res.cookie("token", null, {
             expires: new Date(Date.now())
         })
 
         res.send("Log out successfully");
-    }
-    catch(err)
-    {
+    } catch (err) {
         res.status(400).send("Error: " + err.message);
     }
 })
