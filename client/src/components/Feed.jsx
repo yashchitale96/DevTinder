@@ -7,8 +7,8 @@ import axios from "axios";
 const Feed = () => {
   const dispatch = useDispatch();
   const feed = useSelector((store) => store.feed);
+
   const getFeed = async () => {
-    if (feed) return;
     try {
       const res = await axios.get(BASE_URL + "/feed", {
         withCredentials: true,
@@ -18,15 +18,30 @@ const Feed = () => {
       console.log(err);
     }
   };
+
+  // Fetch feed on mount
   useEffect(() => {
-    getFeed();
+    if (!feed || !feed.data || feed.data.length === 0) {
+      getFeed();
+    }
+    // eslint-disable-next-line
   }, []);
+
+  // Fetch feed when data becomes empty after an action
+  useEffect(() => {
+    if (feed && feed.data && feed.data.length === 0) {
+      getFeed();
+    }
+    // eslint-disable-next-line
+  }, [feed]);
+
+  if (!feed || !feed.data || feed.data.length === 0)
+    return <h1>No new Users Found</h1>;
+
   return (
-    feed && (
-      <div>
-        <Usercard user={feed.data[0]} />
-      </div>
-    )
+    <div>
+      <Usercard user={feed.data[0]} />
+    </div>
   );
 };
 

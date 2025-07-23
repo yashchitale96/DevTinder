@@ -28,6 +28,8 @@
 - Show Toast Message on save of profile
 - New Page - See all the connections
 - New Page - See all the connection Request
+- Feature - Accept/Reject connection request
+- Send/Ignore the user card from the feed
 Body
     NavBar
     Route/ => Login
